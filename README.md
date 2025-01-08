@@ -77,13 +77,6 @@ $ head -n "some number" filename1.extension filename2.extension ...
 ```
 
 ## Resources
-- Group members: Yuying Wang 
-  - Discussed about how to work between user space and kernel space
-
-- Office hours: 
-  - Friday, 09/08/2023: Asked about implementation of uniq and head in user space only with Luke Morreale
-  - Tuesday, 09/12/2023: Asked about specifications of program, readme file, screenshots, and how I should implement both uniq and head in kernel (only call system call in user space)
-
 - Online resources: 
   - How to add a system call in xv6: https://hackmd.io/@MarconiJiang/xv6_analysis?utm_source=preview-mode&utm_medium=rec
   - How to pass a value to a system call in xv6: https://stackoverflow.com/questions/46870509/how-to-pass-a-value-into-system-call-xv6
@@ -175,11 +168,6 @@ $ ps -n <name>
 ```
 
 ## Resources:
-
-- Office hours: 
-  - Thursday, 09/28/2023: Asked Professor to clarify about the test.c and ps system calls implementation.
-  - Friday, 09/29/2023: Asked Luke to clarify functionality and assess output
-
 - Online resources: 
   - How to create system call: https://hackmd.io/@MarconiJiang/xv6_analysis?utm_source=preview-mode&utm_medium=rec
   - Convert ticks to a readable format: https://github.com/dsa-shua/xv6-riscv-projects/blob/main/ps/kernel/sysproc.c
@@ -261,10 +249,6 @@ $ test PRIORITY head headtest.txt head_k headtest.txt
 ```
 
 ## Resources:
-
-- Office hours: 
-  - Thursday, 10/26/2023: Asked Professor to clarify about the scheduler implementation in test.c and differentiate between uniq/uniq_k and head/head_k.
-  - Tuesday, 10/31/2023: Asked Professor about the ticks and bugs in the printed outputs for the processes with priority scheduler. 
 
 - Online resources: 
   - How to create system call: https://hackmd.io/@MarconiJiang/xv6_analysis?utm_source=preview-mode&utm_medium=rec
@@ -696,9 +680,6 @@ $ test PRIORITY head headtest.txt head_k headtest.txt
   - In Project 3, I note that running "test PRIORITY uniq uniqtest.txt uniq_k uniqtest.txt" right after the kernel boots will cause a kernel trap. But keeping a consistent and small buffer size of 512 helps removing the problem. 
 
 ## Resources
-- Group member: Yuying Wang
-  - Discussed about the expected output when deference a null pointer in part 1
-
 - Online resources: 
   - First user process: https://pekopeko11.sakura.ne.jp/unix_v6/xv6-book/en/The_first_process.html
   - How to use gdb in Docker for xv6-riscv: https://www.youtube.com/watch?v=mkTIOiGpykg
