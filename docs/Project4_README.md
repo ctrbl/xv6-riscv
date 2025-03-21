@@ -11,10 +11,10 @@
 
 - Before any implementation, if we dereference a null pointer, instead of seeing an exception, we will see whatever code is in the first bit of code in the program that is running. This is because the user first program (initcode.S) is loaded into the very first part of the user address space (address 0x0) in xv6. 
 
-  ![Alt text](</images/null_before_xv6.png>)
+  ![Alt text](<./images/null_before_xv6.png>)
 
 - In Linux, if we implement the same files using C libraries, compile, and run them, we will get segmentation fault trying to access these pointers. Note, I compile and run these files in Ubuntu. 
-  ![Alt text](</images/null_before_linux.png>)
+  ![Alt text](<./images/null_before_linux.png>)
   - Accessing memory at address 0x0 (null1.c) is not allowed for regular user-space processes because the operating system uses that address to represent a null pointer. Attempting to read or write to address 0 is considered a violation of memory protection, and Linux responds by sending a segmentation fault signal to the process. This signal typically terminates the program to prevent it from causing further issues.
   - Dereferencing arbitray memory addresses (like 0x1000 and 0x2000 in null2.c and null3.c), that are not allocated or not a part of the current program, will also cause Linux to send a segmentation fault to terminate the process. 
 
@@ -123,45 +123,45 @@
 
 ### Null Pointer Deference:
 - After unmapping the first 3 pages, deferencing any pointer from (0x0 to 0x2fff) will cause user trap, which kills the process due to protection fault. This is because the program tries to access protected memory. 
-  ![Alt text](</images/null_after.png>)
+  ![Alt text](<./images/null_after.png>)
 
 ### Changes to older user programs:
 - uniq: 
 ```bash
   $ uniq -cid uniqtest.txt
 ```
-  ![Alt text](</images/p1_uniq.png>)
+  ![Alt text](<./images/p1_uniq.png>)
 
 - head: 
 ```bash
   $ head -5 headtest.txt
 ```
-  ![Alt text](</images/p1_head.png>)
+  ![Alt text](<./images/p1_head.png>)
 
 - ps:
 ```bash
   $ ps
 ```
-  ![Alt text](</images/p1_ps.png>)
+  ![Alt text](<./images/p1_ps.png>)
 
 - test:
 ```bash
   // default scheduler
   $ test head -3 headtest.txt uniq -d uniqtest.txt 
 ```
-  ![Alt text](</images/p1_test.png>)
+  ![Alt text](<./images/p1_test.png>)
 
 ```bash
   // FCFS scheduler
   $ test FCFS uniq -i uniqtest.txt uniq_k -c uniqtest.txt
 ```
-  ![Alt text](</images/p1_test_FCFS.png>)
+  ![Alt text](<./images/p1_test_FCFS.png>)
 
 ```bash
   // PRIORITY scheduler (default)
   $ test PRIORITY head -3 headtest.txt head_k -3 headtest.txt
 ```
-  ![Alt text](</images/p1_test_PRIORITY.png>)
+  ![Alt text](<./images/p1_test_PRIORITY.png>)
 
 - These screenshots show that even when we unmap the first 3 pages in the pagetable, every user program (and kernel program like uniq_k, head_k, etc.) still behaves the same way. **There are no changes.**
 
@@ -345,7 +345,7 @@
 - user/bounds2.c: checks that the user stack is at the top of user address space; check order of code-heap-stack
 - user/heap.c: checks that heap can grow up to 5 pages below stack 
 - user/heap2.c: checks that heap cannot grow into the user stack (since there exists at least 5-page gap between them)
-  ![Alt text](</images/p2_tests.png>)
+  ![Alt text](<./images/p2_tests.png>)
 
 ### Changes to older user programs:
 
@@ -353,44 +353,44 @@
 ```bash
   $ uniq -cid uniqtest.txt
 ```
-  ![Alt text](</images/p2_uniq.png>)
+  ![Alt text](<./images/p2_uniq.png>)
 
 - head:
 ```bash
   $ head -5 headtest.txt
 ```
-  ![Alt text](</images/p2_head.png>)
+  ![Alt text](<./images/p2_head.png>)
 
 - ps:
 ```bash
   $ ps
 ```
-  ![Alt text](</images/p2_ps.png>)
+  ![Alt text](<./images/p2_ps.png>)
 
 - test:
 ```bash
   // default scheduler
   $ test uniq_k uniqtest.txt head_k -5 headtest.txt uniq -cid uniqtest.txt head -1 headtest.txt
 ```
-  ![Alt text](</images/p2_test.png>)
+  ![Alt text](<./images/p2_test.png>)
 
 ```bash
   // FCFS scheduler
   $ test FCFS uniq -c uniqtest.txt head_k -2 headtest.txt uniq_k -d uniqtest.txt
 ```
-  ![Alt text](</images/p2_test_FCFS.png>)
+  ![Alt text](<./images/p2_test_FCFS.png>)
 
 ```bash
   // PRIORITY scheduler (custom)
   $ test PRIORITY head -3 headtest.txt 1 head_k -3 headtest.txt 5
 ```
-  ![Alt text](</images/p2_test_PRIORITY.png>)
+  ![Alt text](<./images/p2_test_PRIORITY.png>)
 
 ```bash
   // PRIORITY scheduler (default)
   $ test PRIORITY uniq -cid uniqtest.txt head_k -1 headtest.txt
 ```
-  ![Alt text](</images/p2_test_PRIORITY_def.png>)
+  ![Alt text](<./images/p2_test_PRIORITY_def.png>)
 
 - These show that there are no changes in the user programs, as well as kernel programs, after we have rearranged the user address space by moving the user stack on top, keeping at least 5 pages as a gap between the end of the heap and the user stack. We also keep the first 3 pages unmapped like part A. All the schedulers, including DEFAULT, FCFS, and PRIORITY (both custom and default PRIORITY) still behave the same as Project 3. Note that I have fixed the bugs in Project 3 where if uniq_k runs right after boot time caused a kernel trap. See the Debugging section below for more information. Therefore, the memory layout modifications we did in this project did not change the way our old user and kernel programs work. 
 
@@ -405,11 +405,11 @@
   $ make qemu
 ```
 - make clean:
-  ![Alt text](</images/make_clean.png>)
+  ![Alt text](<./images/make_clean.png>)
 - make:
-  ![Alt text](</images/make.png>)
+  ![Alt text](<./images/make.png>)
 - make qemu:
-  ![Alt text](</images/make_qemu.png>)
+  ![Alt text](<./images/make_qemu.png>)
 
 
 ## Debugging & Changes to Previous Code:
